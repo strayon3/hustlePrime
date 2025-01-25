@@ -120,11 +120,24 @@ async def simulate_bot(playwright, bot_id):
             await asyncio.sleep(random.uniform(18, 30))  # Simulate time spent on the page         
 
     except Exception as e:
-        print(f"Bot {bot_id}: Error during execution: {e}")
+        # Change: Catch the exception and continue to the food site
+        print(f"Bot {bot_id}: Error on the news site: {e}. Continuing to the food site.")
+
+    # Step 2: Interact with the food site
+        print(f"Bot {bot_id}: Navigating to the food site.")
+        for food_url in foodpage_url:
+            try:
+                print(f"Bot {bot_id}: Visiting {food_url}")
+                await page.goto(food_url)
+                await asyncio.sleep(random.uniform(18, 30))  # Simulate time spent on the page         
+            except Exception as e:
+                print(f"Bot {bot_id}: Error on the food site: {e}. Skipping this page.")
 
     finally:
         print(f"Bot {bot_id}: Closing the browser.")
         await browser.close()
+
+   
 
 async def manage_bots():
     """Manages the creation and execution of multiple bots."""
