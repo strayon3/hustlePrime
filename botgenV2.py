@@ -8,9 +8,9 @@ import time
 from playwright.async_api import async_playwright
 
 # Configuration for bot behavior
-MAX_CONCURRENT_BOTS = 6  # Maximum number of bots at a time
-BOT_CREATION_INTERVAL = (5, 60)  # Random interval between bot creations (in seconds)
-AD_CLICK_PROBABILITY = random.uniform(0.3, 0.5)  # Probability range of clicking ads
+MAX_CONCURRENT_BOTS = 18  # Maximum number of bots at a time
+BOT_CREATION_INTERVAL = (10, 45)  # Random interval between bot creations (in seconds)
+AD_CLICK_PROBABILITY = random.uniform(0.5, 0.7)  # Probability range of clicking ads
 ARTICLE_CLICK_PROBABILITY = 0.8  # Probability of clicking articles
 PAGE_REFRESH_PROBABILITY = 0.3  # Probability of refreshing the page
 
@@ -117,7 +117,7 @@ async def simulate_bot(playwright, bot_id):
         for food_url in foodpage_url:
             print(f"Bot {bot_id}: Visiting {food_url}")
             await page.goto(food_url)
-            await asyncio.sleep(random.uniform(18, 30))  # Simulate time spent on the page         
+            await asyncio.sleep(random.uniform(5, 10))  # Simulate time spent on the page         
 
     except Exception as e:
         # Change: Catch the exception and continue to the food site
@@ -129,7 +129,7 @@ async def simulate_bot(playwright, bot_id):
             try:
                 print(f"Bot {bot_id}: Visiting {food_url}")
                 await page.goto(food_url)
-                await asyncio.sleep(random.uniform(18, 30))  # Simulate time spent on the page         
+                await asyncio.sleep(random.uniform(5, 10))  # Simulate time spent on the page         
             except Exception as e:
                 print(f"Bot {bot_id}: Error on the food site: {e}. Skipping this page.")
 
